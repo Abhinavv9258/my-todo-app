@@ -56,7 +56,8 @@ const Todo: React.FC<TodoProps> = ({
     return (
         <motion.div
             ref={todoRef}
-            className={`p-4 rounded bg-white bg-opacity shadow-lg border-2`}
+            className={`p-4 rounded bg-white bg-opacity shadow-lg border-2
+                ${status === 'completed' ? 'border-green-500' : 'border-yellow-500'} border-dashed`}
             drag
             dragElastic={1}
             dragConstraints={dragConstraints}
@@ -71,11 +72,11 @@ const Todo: React.FC<TodoProps> = ({
         >
             <div className="flex justify-between items-center">
                 <div className="flex items-start space-y-3 flex-col">
-                    <p className="font-bold text-black" >{description}</p>
-                    <p className="font-bold text-black">{updatedAtIST}</p>
+                    <p className="font-bold text-black">{description}</p>
+                    <p className="text-sm text-gray-500">{updatedAtIST}</p>
                 </div>
                 <div className="flex items-center space-y-4 flex-col">
-                    <div className="text-red-500">
+                    <div className="text-red-500 rounded-3xl p-0 m-0 ">
                         <svg onClick={handleDeleteTodo} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 hover:text-red-700 cursor-pointer">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
