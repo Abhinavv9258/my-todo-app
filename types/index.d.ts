@@ -25,4 +25,5 @@ declare type TodoProps = {
     updatedAt: string;
     onUpdatePosition: (id: number, x: number, y: number, z: number) => void;
     onToggleStatus: (id: number) => void;
+    onDeleteTodo: (id: number) => void;
 };

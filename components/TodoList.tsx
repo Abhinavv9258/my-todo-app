@@ -47,14 +47,35 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
 
     const toggleTodoStatus = (id: number) => {
         setTodo((prevTodo) =>
-          prevTodo.map((todo) =>
-            todo.id === id
-              ? { ...todo, status: todo.status === 'completed' ? 'pending' : 'completed' }
-              : todo
-          )
+            prevTodo.map((todo) =>
+                todo.id === id
+                    ? { ...todo, status: todo.status === 'completed' ? 'pending' : 'completed' }
+                    : todo
+            )
         );
-      };
-    
+    };
+
+
+    const handleDeleteTodo = async (id: number) => {
+        try {
+            const response = await fetch(`/api/todo/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: id }),
+            },
+            );
+            if (response.ok) {
+                setTodo((prevTodo) => prevTodo.filter((todo) => todo.id !== id));
+            } else {
+                console.error('Failed to delete todo:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error deleting todo:', error);
+        }
+    };
+
 
     return (
         <div className="grid gap-4">
@@ -69,6 +90,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
                     updatedAt={todo.updatedAt}
                     onUpdatePosition={updateTodoPosition}
                     onToggleStatus={toggleTodoStatus}
+                    onDeleteTodo={handleDeleteTodo}
                 />
             ))}
         </div>
