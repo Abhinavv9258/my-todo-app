@@ -11,7 +11,7 @@ declare type TodoItem = {
     status: string;
 };
 
-declare interface TodoProps {
+declare interface TodoListProps {
     todo: TodoItem[];
     setTodo: React.Dispatch<React.SetStateAction<TodoItem[]>>;
 }
@@ -25,5 +25,4 @@ declare type TodoProps = {
     updatedAt: string;
     onUpdatePosition: (id: number, x: number, y: number, z: number) => void;
     onToggleStatus: (id: number) => void;
-    onDeleteTodo: (id: number) => void;
 };
