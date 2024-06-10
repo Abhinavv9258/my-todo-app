@@ -25,9 +25,8 @@ export async function DELETE(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     try {
         const body = await req.json();
-        const { id } = body;
+        const { id, updatedAt } = body;
         const { x, y, z } = body.position;
-        const updatedAt = new Date().toISOString();
 
         const updatedTodo = await prisma.todo.update({
             where: { id: Number(id) },
