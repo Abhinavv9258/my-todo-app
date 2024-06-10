@@ -15,7 +15,10 @@ export async function DELETE(req: NextRequest) {
         );
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
     }
 }
 
@@ -30,9 +33,16 @@ export async function PUT(req: NextRequest) {
             where: { id: Number(id) },
             data: { position: { x, y, z }, updatedAt },
         });
+        return NextResponse.json(
+            { updatedTodo }, 
+            { status: 200 }
+        );
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
     }
 }
 
@@ -46,8 +56,15 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
             where: { id: Number(id) },
             data: { status, updatedAt }
         });
+        return NextResponse.json(
+            { updatedTodo },
+            { status: 200 }
+        );
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
     }
 }
