@@ -30,12 +30,12 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id, position: { x, y, z } }),
+                body: JSON.stringify({ id, position: { x, y, z }, updatedAt: new Date().toISOString() }),
             });
             if (response.ok) {
                 setTodo((prevTodo) =>
                     prevTodo.map((todo) =>
-                        todo.id === id ? { ...todo, position: { ...todo.position, x, y, z } } : todo
+                        todo.id === id ? { ...todo, position: { ...todo.position, x, y, z }, updatedAt: new Date().toISOString() } : todo
                     )
                 );
             } else {

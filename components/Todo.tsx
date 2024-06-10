@@ -20,13 +20,19 @@ const Todo: React.FC<TodoProps> = ({
     const todoRef = useRef<HTMLDivElement>(null);
     const updatedAtIST = format(new Date(updatedAt), 'yyyy-MM-dd hh:mm:ss a', { timeZone: 'Asia/Kolkata' });
 
+    const descriptionLength = description.length;
+    const descriptionWidth = descriptionLength * 10;
+    const timeLength = updatedAt.length;
+    const timeWidth = timeLength * 10;
+    const width = Math.max(descriptionWidth, timeWidth);
+
     const x = useMotionValue(position.x);
     const y = useMotionValue(position.y);
     const z = useMotionValue(position.z);
 
     const dragConstraints = {
         left: 0,
-        right: window.innerWidth,
+        right: window.innerWidth - width,
         top: 0,
         bottom: window.innerHeight - 100,
     };
@@ -65,6 +71,7 @@ const Todo: React.FC<TodoProps> = ({
             onDragEnd={handleDragEnd}
             style={{
                 zIndex: z,
+                width: `${width}px`,
                 position: 'absolute',
                 x: position.x,
                 y: position.y,
