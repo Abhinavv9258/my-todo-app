@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Todo from "./Todo";
 
 const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
+
     const fetchTodo = async () => {
         try {
             const response = await fetch('/api/todo');
@@ -45,14 +46,30 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
         }
     };
 
-    const toggleTodoStatus = (id: number) => {
-        setTodo((prevTodo) =>
-            prevTodo.map((todo) =>
-                todo.id === id
-                    ? { ...todo, status: todo.status === 'completed' ? 'pending' : 'completed' }
-                    : todo
-            )
-        );
+    const toggleTodoStatus = async (id: number) => {
+        try {
+            const response = await fetch(`/api/todo/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, status: todo.find(item => item.id === id)?.status === 'completed' ? 'pending' : 'completed', updatedAt: new Date().toISOString() }),
+            });
+
+            if (response.ok) {
+                setTodo((prevTodo) =>
+                    prevTodo.map((todo) =>
+                        todo.id === id
+                            ? { ...todo, status: todo.status === 'completed' ? 'pending' : 'completed', updatedAt: new Date().toISOString() }
+                            : todo
+                    )
+                );
+            } else {
+                console.error('Failed to toggle todo status:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error toggling todo status:', error);
+        }
     };
 
 

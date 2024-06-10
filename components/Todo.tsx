@@ -48,6 +48,11 @@ const Todo: React.FC<TodoProps> = ({
         onDeleteTodo(id);
     };
 
+    const handleCheckboxChange = () => {
+        onToggleStatus(id);
+    };
+
+
     return (
         <motion.div
             ref={todoRef}
@@ -76,11 +81,11 @@ const Todo: React.FC<TodoProps> = ({
                         </svg>
                     </div>
                     <input
-                        onClick={() => onToggleStatus(id)}
                         type="checkbox"
                         checked={status === 'completed'}
+                        onChange={handleCheckboxChange}
+                        className="size-4 m-0 p-0"
                     />
-                    <p className="font-bold text-black">{status}</p>
                 </div>
             </div>
         </motion.div>
