@@ -28,7 +28,7 @@ export async function POST(req: Request): Promise<NextResponse> {
         const newTodo = await prisma.todo.create({
             data: { title, description, position, status },
         });
-        
+
         return NextResponse.json(
             { newTodo },
             { status: 200 }
