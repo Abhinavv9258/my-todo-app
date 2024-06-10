@@ -1,6 +1,5 @@
 # MY-TODO-APP
 
-
 ### Objective:
 Develop a modern, interactive Todo application for task management, utilizing a full-stack approach.
 
@@ -40,6 +39,9 @@ Updated Task:
 
 Demo videos: 
 [![Watch the video](https://github.com/Abhinavv9258/my-todo-app/assets/79451162/2a2782ff-524f-46fe-ac41-174b757687ac)](https://player.vimeo.com/video/955938089?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479)
+
+### [Task.pdf](https://github.com/user-attachments/files/15769917/Welcome_file.1.pdf)
+
 
 ### Getting Started
 
