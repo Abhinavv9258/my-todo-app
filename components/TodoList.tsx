@@ -17,7 +17,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
         } catch (error) {
             console.error('Failed to fetch todo:', error);
         }
-    }, []);
+    }, [setTodo]);
 
     useEffect(() => {
         fetchTodo();
