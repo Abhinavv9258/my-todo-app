@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Todo from "./Todo";
 
 const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
 
-    const fetchTodo = async () => {
+    const fetchTodo = useCallback(async () => {
         try {
             const response = await fetch('/api/todo');
             const data = await response.json();
@@ -17,7 +17,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
         } catch (error) {
             console.error('Failed to fetch todo:', error);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchTodo();
