@@ -21,7 +21,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
 
     useEffect(() => {
         fetchTodo();
-    }, []);
+    }, [fetchTodo]);
 
     const updateTodoPosition = async (id: number, x: number, y: number, z: number) => {
         try {
