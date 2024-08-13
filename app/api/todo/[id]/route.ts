@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import { ObjectId } from "bson";
 
 export async function DELETE(req: NextRequest) {
     try {
@@ -7,7 +8,7 @@ export async function DELETE(req: NextRequest) {
         const { id } = body;
 
         await prisma.todo.delete({
-            where: { id: Number(id) },
+            where: { id: new ObjectId(id).toString() },
         });
         return NextResponse.json(
             { message: 'Todo deleted successfully' },
@@ -29,11 +30,11 @@ export async function PUT(req: NextRequest) {
         const { x, y, z } = body.position;
 
         const updatedTodo = await prisma.todo.update({
-            where: { id: Number(id) },
+            where: { id: new ObjectId(id).toString() },
             data: { position: { x, y, z }, updatedAt },
         });
         return NextResponse.json(
-            { updatedTodo }, 
+            { updatedTodo },
             { status: 200 }
         );
     } catch (error) {
@@ -52,7 +53,7 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
         const { id, status, updatedAt } = body;
 
         const updatedTodo = await prisma.todo.update({
-            where: { id: Number(id) },
+            where: { id: new ObjectId(id).toString() },
             data: { status, updatedAt }
         });
         return NextResponse.json(
